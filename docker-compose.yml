@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8080:80/tcp"
+      - "4443:443/tcp"
+    environment:
+      TZ: 'America/Guayaquil'
+      # WEBPASSWORD: ${PIHOLE_WEBPASS}
+      WEBPASSWORD: 'toreto08'
+    # Volumes store your data between container upgrades
+    volumes :
+      - '/home/adminos/storage/wd/personal/pihole/etc-pihole:/etc/pihole'
+      - '/home/adminos/storage/wd/personal/pihole/etc-dnsmaq.d:/etc/dnsmasq.d'
+    dns:
+      - 127.0.0.1
+      - 8.8.8.8
+    cap_add:
+    - NET_ADMIN
+    restart:  unless-stopped
