@@ -35,3 +35,15 @@ docker run --name mongodbc0 -v /var/lib/docker/volumes/volmongodb0/_data:/data/d
 
 
 # methode2
+En este metodo no vamos a asociar ningun path especifico sino directamente confiamos el path /var/lib/docker/volumes/ que es donde normalmente se guardan los volumenes de docker
+## Creacion del volumen en docker asociado a este path
+```bash
+    docker volume create volmongodb0
+```
+## Creacion del contenedor asociado a este volumen
+```bash
+docker run -d --name mongodbc0 -v volmongodb0:/data/db mongodb/ --restart always mongodb-community-server:latest
+```
+
+## nota: 
+El parametro always es usado porque normalmente se tiene que reinciar los servidores y en ese momento lo conveniente es que el contenedor se reinicie automaticamente tambien.
