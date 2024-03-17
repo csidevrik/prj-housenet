@@ -29,13 +29,7 @@ Ahora creamos el folder para la base de datos en nuestro cado mongodb
 ```
 ## Creacion del contenedor asociado a este volumen
 ```bash
-docker run --name mongodbc0 -v /var/lib/docker/volumes/volmongodb0/_data:/data/db --restart always mongodb/mongodb-community-server:latest
-```
-existe un problema con este comando 
-asi que solo puedo usar 
-de esta manera 
-```bash
-docker run --name mongodbc0 -v /var/lib/docker/volumes/volmongodb0/_data:/data/db mongodb/mongodb-community-server:latest
+docker run --name mongodbc0 -v /var/lib/docker/volumes/volmongodb0/_data:/data/db -d --restart always -p 27017:27017/tcp mongodb/mongodb-community-server:latest
 ```
 
 
