@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  o-mongo:
+    container_name: o-mongo
+    image: mongo
+    ports:
+      - "27017:27017/tcp"
+    environment:
+      TZ: 'America/Guayaquil'
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    # Volumen  para persistir los datos de MongoDB en el host
+    # descomenta la linea despues de la linea windows
+    volumes :
+      - 'C:\Users\adminos\volumes\mongodb-0:/data/db'
+    dns:
+      - 127.0.0.1
+      - 8.8.8.8
+    cap_add:
+    - NET_ADMIN
+    restart:  unless-stopped
