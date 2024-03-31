@@ -13,10 +13,38 @@ services:
     # Volumen  para persistir los datos de MongoDB en el host
     # descomenta la linea despues de la linea windows
     volumes :
-      - 'C:\Users\adminos\volumes\mongodb-0:/data/db'
-    dns:
-      - 127.0.0.1
-      - 8.8.8.8
+      - '~/volumes/mongodb-0:/data/db'
+    # dns:
+    #   - 127.0.0.1
+    #   - 8.8.8.8
     cap_add:
     - NET_ADMIN
-    restart:  unless-stopped
+    restart:  always
+  
+  o-mariadb:
+    container_name: o-mariadb
+    image: mariadb
+    ports:
+     - "3306:3306/tcp"
+    environment:
+      TZ: 'America/Guayaquil'
+      MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - ~/volumes/mariadb-0:/var/lib/mysql
+    cap_add:
+      - NET_ADMIN
+    restart:  always
+
+  o-postgres:
+    container_name: o-postgres
+    image: postgres
+    ports:
+     - "5432:5432/tcp"
+    environment:
+      TZ: 'America/Guayaquil'
+      POSTGRES_PASSWORD: example
+    volumes:
+      - ~/volumes/postgres-0:/var/lib/postgresql/data
+    cap_add:
+      - NET_ADMIN
+    restart:  always
