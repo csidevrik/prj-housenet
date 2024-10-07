@@ -1,5 +1,6 @@
-services:
+version: '3.8'
 
+services:
       # Oracle service (label used to access the service container)
   oracle:
 
@@ -15,11 +16,15 @@ services:
         # Forward Oracle port
       ports:
       - 1521:1521
+      volumes:
+      - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
+      - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
+      healthcheck:
+        test: ["CMD", "sqlplus", "-L", "sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba", "@healthcheck.sql"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      restart: always 
 
-        # Provide healthcheck script options for startup
-      # options: >-
-      # --health-cmd healthcheck.sh
-        # --health-interval 10s
-        # --health-timeout 5s
-        # --health-retries 10
-
+volumes:
+  oracle_data:
