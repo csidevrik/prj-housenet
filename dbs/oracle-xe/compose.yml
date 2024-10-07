@@ -11,7 +11,7 @@ services:
       environment:
         ORACLE_RANDOM_PASSWORD: "true"
         APP_USER: dbadmin
-        APP_USER_PASSWORD: forelor
+        APP_USER_PASSWORD: fqocac21c
 
         # Forward Oracle port
       ports:
@@ -28,3 +28,4 @@ services:
 
 volumes:
   oracle_data:
+  oracle_backup:
