@@ -15,5 +15,5 @@ services:
     restart: always
 
 # No es necesario definir volúmenes si estás montando directorios del host
-volumes:
+
   # Si defines volúmenes de Docker, aquí estarían
