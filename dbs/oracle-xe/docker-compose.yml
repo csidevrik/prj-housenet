@@ -12,12 +12,7 @@ services:
     volumes:
       - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
       - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
-    
-    healthcheck:
-      test: ["CMD-SHELL", "echo 'SELECT 1 FROM dual;' | sqlplus -L sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+
     restart: always  # Esto asegura que el contenedor se reinicie automáticamente si falla
 
 volumes:
