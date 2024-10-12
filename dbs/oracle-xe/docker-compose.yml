@@ -4,16 +4,15 @@ services:
   oracle-db:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     environment:
-      - ORACLE_SID=ORCLCDB
-      - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=fqocac21c
     ports:
-      - "1521:1521"
+      - "1521:1521"  # El puerto 1521 del host se vincula al puerto 1521 del contenedor
     volumes:
       - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
       - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
-    restart: always
 
-# No es necesario definir volúmenes si estás montando directorios del host
+    restart: always  # Esto asegura que el contenedor se reinicie automáticamente si falla
 
-  # Si defines volúmenes de Docker, aquí estarían
+volumes:
+  oracle-data: 
+  oracle-backup:
