@@ -1,5 +1,3 @@
-
-
 version: '3.1'
 
 services:
@@ -7,8 +5,6 @@ services:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     container_name: oracle-db
     environment:
-      - ORACLE_SID=ORCLCDB
-      - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=fqocac21c
     ports:
       - "1521:1521"  # Mapea el puerto 1521 del host al puerto 1521 del contenedor
