@@ -9,7 +9,7 @@ services:
 
         # Provide passwords and other environment variables to container
     environment:
-      ORACLE_RANDOM_PASSWORD: true
+      ORACLE_RANDOM_PASSWORD: "true"
       APP_USER: fdbadm
       APP_USER_PASSWORD: fqocac21
 
