@@ -16,11 +16,13 @@ services:
 
 volumes:
   oracle-data:
+    driver: local
     driver_opts:
       type: none
       o: bind
       device: /mnt/docker_storage/vols/oracle/oradata  # Ruta en el host
   oracle-backup:
+    driver: local
     driver_opts:
       type: none
       o: bind
