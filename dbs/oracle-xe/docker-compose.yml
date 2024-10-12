@@ -4,13 +4,16 @@ services:
   oradb:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     environment:
-      # - ORACLE_SID=ORCLCDB
-      # - ORACLE_PDB=ORCLPDB1
+      - ORACLE_SID=ORCLCDB
+      - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=fqocac21c
     ports:
       - "1521:1521"  # Mapea el puerto 1521 del host al puerto 1521 del contenedor
     volumes:
-      - oracle-data:/opt/oracle/oradata  # Asocia el volumen creado
+      # - oracle-data:/opt/oracle/oradata  # Asocia el volumen creado
+      # - oracle-scripts:/opt/oracle/scripts/startup  # Asocia el volumen creado
+      - ./scripts:/opt/oracle/scripts/startup  # Monta el directorio del script SQL en el contenedor
+      - oracle-data:/opt/oracle/oradata  # Asocia el volumen de datos
     healthcheck:
       test: ["CMD-SHELL", "echo 'SELECT 1 FROM dual;' | sqlplus -s sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba"]
       interval: 30s
@@ -25,3 +28,9 @@ volumes:
       type: none
       o: bind
       device: /mnt/docker_storage/vols/oracle/oradata  # Ruta en el host
+  # oracle-scripts:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: /mnt/docker_storage/vols/oracle/scripts  # Ruta en el host
