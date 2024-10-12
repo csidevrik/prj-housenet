@@ -4,7 +4,7 @@ services:
   oradb:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     environment:
-      - ORACLE_SID=ORCLCDB
+      # - ORACLE_SID=ORCLCDB
       # - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=fqocac21c
     ports:
