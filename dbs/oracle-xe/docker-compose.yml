@@ -7,9 +7,9 @@ services:
       - ORACLE_PWD=fqocac21c
     ports:
       - "1521:1521"  # El puerto 1521 del host se vincula al puerto 1521 del contenedor
-    volumes:
-      - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
-      - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
+    # volumes:
+    #   - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
+    #   - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
 
     restart: always  # Esto asegura que el contenedor se reinicie automáticamente si falla
 
