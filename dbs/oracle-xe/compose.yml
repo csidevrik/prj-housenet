@@ -2,30 +2,34 @@ version: '3.8'
 
 services:
       # Oracle service (label used to access the service container)
-  oracle:
+  oracle-xe-gv:
 
         # Docker Hub image (feel free to change the tag "latest" to any other available one)
-      image: gvenzl/oracle-xe:latest
+    image: gvenzl/oracle-xe:latest
 
         # Provide passwords and other environment variables to container
-      environment:
-        ORACLE_RANDOM_PASSWORD: "true"
-        APP_USER: dbadmin
-        APP_USER_PASSWORD: fqocac21c
-
+    environment:
+      ORACLE_RANDOM_PASSWORD: "true"
+      ORACLE_PASSWORD: fqocac21c
+        # ORACLE_DATABASE:
+      APP_USER: dbadm
+      APP_USER_PASSWORD: fqocac21c
         # Forward Oracle port
-      ports:
+    ports:
       - 1521:1521
-      volumes:
-      - /mnt/docker_storage/vols/oracle/oradata:/opt/oracle/oradata
-      - /mnt/docker_storage/vols/oracle/backup:/opt/oracle/backup
-      healthcheck:
-        test: ["CMD", "sqlplus", "-L", "sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba", "@healthcheck.sql"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
-      restart: always 
+    volumes:
+      - oracle-data:/u01/app/oracle/oradata
+    healthcheck:
+      test: ["CMD", "sqlplus", "-L", "sys/fqocac21c@//localhost:1521/XEPDB1 as sysdba", "@healthcheck.sql"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always 
 
 volumes:
-  oracle_data:
-  oracle_backup:
+  oracle-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/docker_storage/vols/oracle/oradata  # Ruta en el host
