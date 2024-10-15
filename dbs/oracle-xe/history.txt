@@ -1,0 +1,618 @@
+    1  sudo dnf install cockpit
+    2  sudo dnf install cockpit-networkmanager-323-1.fc40.noarch
+    3  sudo dnf install cockpit-ha-cluster-0.11.7-3.fc40.noarch
+    4  sudo dnf update
+    5  ip addr
+    6  lsblk
+    7  sudo dnf update
+    8  sudo reboot
+    9  sudo pvdisplay
+   10  sudo vgdisplay
+   11  sudo lsblk
+   12  sudo smartctl -a /dev/sda
+   13  echo 1 | sudo tee /sys/class/block/sda/device/rescan
+   14  sudo smartctl -a /dev/sda
+   15  sudo smartctl -a /dev/sdb
+   16  sudo smartctl -a /dev/sda
+   17  sudo reboot
+   18  sudo dnf update
+   19  lsblk
+   20  sudo systemctl -a /dev/sda
+   21  sudo smartctl -a /dev/sda
+   22  sudo smartctl -a /dev/sdb
+   23  sudo fdisk -l
+   24  sudo dnf update
+   25  sudo lsblk
+   26  docker ps
+   27  sudo dnf remove docker \\n                  docker-client \\n                  docker-client-latest \\n                  docker-common \\n                  docker-latest \\n                  docker-latest-logrotate \\n                  docker-logrotate \\n                  docker-selinux \\n                  docker-engine-selinux \\n                  docker-engine
+   28  sudo dnf -y install dnf-plugins-core\nsudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+   29  sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   30  sudo usermod -aG docker $USER
+   31  sudo systemctl enable docker
+   32  sudo systemctl start docker
+   33  docker ps
+   34  exit
+   35  docker ps
+   36  sudo lsblk
+   37  sudo pvcreate /dev/sda
+   38  sudo parted /dev/sda
+   39  sudo fdisk /dev/sda
+   40  sudo pvcreate /dev/sda1
+   41  sudo lsblk
+   42  sudo df -h
+   43  sudo pvcreate /dev/sda1
+   44  sudo fdisk /dev/sda
+   45  sudo pvcreate /dev/sda1
+   46  sudo parted /dev/sda
+   47  sudo pvcreate /dev/sda1
+   48  sudo vgcreate docker_vg /dev/sda
+   49  sudo vgcreate docker_vg /dev/sda1
+   50  sudo lvcreate -l 100%FREE -n docker_lv docker_vg
+   51  sudo mkfs.xfs /dev/docker_vg/docker_lv
+   52  sudo mkdir /mnt/docker_storage
+   53  sudo mount /dev/docker_vg/docker_lv /mnt/docker_storage
+   54  sudo nvim /etc/fstab
+   55  echo '/dev/docker_vg/docker_lv /mnt/docker_storage xfs defaults 0 0' | sudo tee -a /etc/fstab
+   56  sudo reboot
+   57  sudo lsblk
+   58  cd /mnt/docker_storage
+   59  ll
+   60  ll -a
+   61  mkdir containers
+   62  sudo mkdir containers
+   63  sudo mkdir vols
+   64  sudo chown fqdev:fqdev -R containers
+   65  sudo chown fqdev:fqdev -R vols
+   66  ll
+   67  cd containers
+   68  ll
+   69  pwd
+   70  sudo nvim /etc/docker/daemon.json
+   71  sudo systemctl restart docker
+   72  docker info | grep "Docker Root Dir"
+   73  sudo nvim /etc/sysctl.conf
+   74  sudo sysctl -p
+   75  docker info | grep "Docker Root Dir"
+   76  sudo sysctl -p
+   77  sudo modprobe br_netfilter
+   78  lsmod | grep br_netfilter
+   79  echo 'br_netfilter' | sudo tee -a /etc/modules
+   80  sudo sysctl -p
+   81  docker info | grep "Docker Root Dir"
+   82  sudo sysctl -p
+   83  docker info | grep "Docker Root Dir"
+   84  ll
+   85  docker ps
+   86  docker images
+   87  history 
+   88  cd /mnt/docker_storage
+   89  lll
+   90  ll
+   91  cd vols
+   92  ll
+   93  ..
+   94  ll
+   95  cd containers
+   96  ll
+   97  sudo lsblk
+   98  sudo df -h
+   99  sudo lsblk -o NAME,SERIAL
+  100  sudo smartctl -i /dev/sda | grep Serial
+  101  sudo shutdown -h now
+  102  sudo lsblk
+  103  sudo fdisk -l
+  104  sudo lsblk
+  105  sudo df -h
+  106  sudo lsblk
+  107  ll
+  108  l
+  109  mkdir dev
+  110  docker ps
+  111  sudo lsblk
+  112  ip addr
+  113  clear
+  114  docker loging
+  115  docker loginn
+  116  docker login
+  117  docker pull container-registry.oracle.com/database/express:latest
+  118  cd /media
+  119  ll
+  120  sudo lsblk
+  121  cd /mnt/docker_storage
+  122  ll
+  123  c vols
+  124  ll
+  125  cd vols
+  126  ll
+  127  mkdir oradata
+  128  ll
+  129  mkdir oracle
+  130  pwd
+  131  ll
+  132  sudo rm -R oradata
+  133  ll
+  134  cd oracle
+  135  ll
+  136  mkdir oradata
+  137  mkdir bakcup
+  138  ll
+  139  pwd
+  140  sudo dnf install 'dnf-command(config-manager)'\nsudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo\nsudo dnf install gh --repo gh-cli
+  141  gh repo clone csidevrik/prj-housenet
+  142  gh auth login
+  143  gh auth refresh -h github.com -s admin:public_key\n
+  144  cd
+  145  ll
+  146  cd dev
+  147  ll
+  148  mkdir github
+  149  ll
+  150  cd github
+  151  gh repo clone csidevrik/prj-housenet
+  152  git@github.com:csidevrik/prj-housenet.git
+  153  https://github.com/csidevrik/prj-housenet.git
+  154  gh repo clone csidevrik/prj-housenet
+  155  cd
+  156  ls -al  ~/.ssh
+  157  ssh-keygen -t rsa -b 4096 -C "carlos.sigua@gmail.com"
+  158  cat ~/.ssh/id_rsa.pub\n
+  159  hostname
+  160  ssh -T git@github.com\n
+  161  cd dev/github
+  162  gh repo clone csidevrik/prj-housenet
+  163  ll
+  164  cd prj-housenet
+  165  ll
+  166  cd dbs
+  167  ll
+  168  cd oracle-xe
+  169  ll
+  170  sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  171  cd 
+  172  sudo nvim .zshrc
+  173  zsh
+  174  cd dev/github
+  175  ll
+  176  cd prj-housenet
+  177  ll
+  178  cd dbs
+  179  ll
+  180  docker-compose -f oracle-xe/docker-compose.yml up -d
+  181  sudo dnf install docker-compose
+  182  docker-compose -f oracle-xe/docker-compose.yml up -d
+  183  docker ps
+  184  ll
+  185  cd oracle-xe
+  186  ll
+  187  docker-compose -f docker-compose.yml up -d
+  188  docker ps
+  189  docker images
+  190  tree
+  191  docker-compose -f docker-compose.yml up
+  192  docker ps
+  193  cd /mnt/docker_storage/vols
+  194  ll
+  195  cd oracle
+  196  ll
+  197  docker-compose down
+  198  docker-compose up --build
+  199  docker pull
+  200  ll
+  201  docker status
+  202  git status
+  203  git pull
+  204  cat docker-compose.yml
+  205  docker-compose -f docker-compose.yml up
+  206  docker login
+  207  docker login container-registry.oracle.com
+  208  docker-compose -f docker-compose.yml up
+  209  docker images
+  210  docker-compose -f docker-compose.yml up -d
+  211  cat docker-compose.yml
+  212  docker-compose -f docker-compose.yml up -d
+  213  docker login container-registry.oracle.com\n
+  214  docker-compose down --volumes\n
+  215  docker-compose -f docker-compose.yml up -d
+  216  docker system prune
+  217  docker-compose -f docker-compose.yml up -d
+  218  git pull
+  219  docker-compose -f docker-compose.yml up -d
+  220  docker ps
+  221  docker-compose down --volumes\n
+  222  docker ps
+  223  git pull
+  224  docker-compose -f compose.yml up -d
+  225  docker ps
+  226  sudo firewall-cmd --add-port=1521 --zone=FedoraServer --permanent
+  227  sudo firewall-cmd --add-port=1521/tcp --zone=FedoraServer --permanent
+  228  sudo firewall-cmd --reload
+  229  docker ps
+  230  telnet localhost 1521
+  231  sudo dnf install telnet
+  232  telnet localhost 1521
+  233  docker ps
+  234  docker logs 1a51e2e17b72
+  235  docker-compose down --volumes
+  236  cd dev/github
+  237  ll
+  238  cd prj-housenet
+  239  ll
+  240  cd dbs
+  241  docker-compose down --volumes
+  242  ll
+  243  cd oracle-xe
+  244  ll
+  245  docker-compose -f compose.yml up -d
+  246  docker ps
+  247  docker-compose down --volumes
+  248  docker-compose down --volumes --remove-orphans
+  249  docker ps
+  250  git pull
+  251  docker-compose -f compose.yml up -d
+  252  docker ps
+  253  telnet 192.169.100.100 1521
+  254  clear
+  255  sudo dnf update
+  256  hostname
+  257  docker ps
+  258  history | grep lsof
+  259  sudo ss -tunlp
+  260  sudo ss -tunlp | grep 1521
+  261  docker
+  262  ll
+  263  history | grep device
+  264  history | grep mnt
+  265  cd /mnt/docker_storage
+  266  ll
+  267  cd vols
+  268  ll
+  269  cd oracle
+  270  ll
+  271  cd oradata
+  272  ll
+  273  ..
+  274  ll
+  275  cd backup
+  276  ll
+  277  ..
+  278  ll
+  279  sudo rm -R bakcup
+  280  ll
+  281  docker container prune
+  282  docker ps
+  283  docker stop db80056e179c
+  284  docker ps
+  285  docker images
+  286  docker login
+  287  sudo chown -R $(whoami):$(whoami) /mnt/docker_storage/vols/oracle/\nsudo chmod -R 755 /mnt/docker_storage/vols/oracle/\n
+  288  sudo lsof -i -P -n | grep LISTEN\n
+  289  docker images
+  290  cd 
+  291  cd dev
+  292  ll
+  293  cd github
+  294  git pull
+  295  git status
+  296  ll
+  297  cd prj-housenet
+  298  git status
+  299  git pull
+  300  ll
+  301  cd dbs
+  302  ll
+  303  cd oracle-xe
+  304  history | grep compose
+  305  docker-compose -f docker-compose.yml up -d
+  306  docker-compose -f docker-compose.yml up -d  --remove-orphans
+  307  docker ps
+  308  docker logs
+  309  docker logs 9ce93a0351a4
+  310  ll
+  311  cd ls -l /mnt/docker_storage/vols/oracle/oradata\nls -l /mnt/docker_storage/vols/oracle/backup\n
+  312  ls -l /mnt/docker_storage/vols/oracle/oradata\nls -l /mnt/docker_storage/vols/oracle/backup\n
+  313  pwd
+  314  sudo chown -R $(whoami):$(whoami) /mnt/docker_storage/vols/oracle/\nsudo chmod -R 755 /mnt/docker_storage/vols/oracle/\n
+  315  docker ps
+  316  docker exec -it oracle-xe_oracle-db_1 cat /opt/oracle/runOracle.sh
+  317  docker exec -it 9ce93a0351a4 cat /opt/oracle/runOracle.sh
+  318  docker pull
+  319  git pull
+  320  ll
+  321  cat docker-compose.yml
+  322  docker-compose down --volumes
+  323  lll
+  324  ll
+  325  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  326  docker-compose -f docker-compose.yml up -d
+  327  docker ps
+  328  docker logs 432ba17591ba
+  329  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  330  docker volume
+  331  docker volume ls
+  332  docker ps
+  333  docker volume rm oracle-xe_oracle_backup
+  334  docker volume rm oracle-xe_oracle_data
+  335  docker volume ls
+  336  docker-compose -f docker-compose.yml up -d
+  337  docker ps
+  338  docker volume ls
+  339  ll
+  340  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  341  docker-compose -f docker-compose.yml up -d
+  342  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  343  git pull
+  344  docker-compose -f docker-compose.yml up -d
+  345  git pull
+  346  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  347  docker-compose -f docker-compose.yml up -d
+  348  docker ps
+  349  docker volume ls
+  350  sudo lsof -i -P -n | grep LISTEN\n
+  351  docker ps
+  352  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  353  docker volume ls
+  354  docker-compose -f docker-compose.yml up -d
+  355  docker ps
+  356  docker logs a42e341a4ba9
+  357  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  358  docker ps
+  359  cd
+  360  docker container create `\n   -it `\n   --name oracle-test `\n   -p 1521:1521 `\n   -e ORACLE_PWD=welcome123 `\n   container-registry.oracle.com/database/express:latest\n\n/
+  361  docker container create `\n   -it `\n   --name oracle-test `\n   -p 1521:1521 `\n   -e ORACLE_PWD=welcome123 `\n   container-registry.oracle.com/database/express:latest
+  362  docker container create -it --name oracle-test -p 1521:1521 -e ORACLE_PWD=welcome123 container-registry.oracle.com/database/express:latest
+  363  docker ps
+  364  docker start oracle-test
+  365  docker ps
+  366  cat docker-compose.yml
+  367  cd dev
+  368  ll
+  369  cd github
+  370  ll
+  371  cd prj-housenet
+  372  cd dbs
+  373  ll
+  374  cd oracle-xe
+  375  git pull
+  376  cat docker-compose.yml
+  377  docker-compose -f docker-compose.yml up -d
+  378  docker ps
+  379  docker stop 9dc4d2c57535
+  380  docker-compose -f docker-compose.yml up -d
+  381  docker ps
+  382  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  383  docker ps
+  384  git pull
+  385  docker-compose -f docker-compose.yml up -d
+  386  docker ps
+  387  cd /mnt/
+  388  ll
+  389  cd docker_storage
+  390  ll
+  391  cd vols
+  392  ll
+  393  cd oracle
+  394  ll
+  395  git pull
+  396  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  397  docker-compose -f docker-compose.yml up -d
+  398  ls -ld /mnt/docker_storage/vols/oracle/oradata\nls -ld /mnt/docker_storage/vols/oracle/backup\n
+  399  sudo mkdir -p /mnt/docker_storage/vols/oracle/oradata /mnt/docker_storage/vols/oracle/backup\nsudo chown -R $(whoami) /mnt/docker_storage/vols/oracle\nsudo chmod -R 755 /mnt/docker_storage/vols/oracle\n
+  400  ls -ld /mnt/docker_storage/vols/oracle/oradata\nls -ld /mnt/docker_storage/vols/oracle/backup\n
+  401  sudo mkdir -p /mnt/docker_storage/vols/oracle/oradata /mnt/docker_storage/vols/oracle/backup\nsudo chown -R $(whoami) /mnt/docker_storage/vols/oracle\nsudo chmod -R 755 /mnt/docker_storage/vols/oracle\n
+  402  ls -ld /mnt/docker_storage/vols/oracle/oradata\nls -ld /mnt/docker_storage/vols/oracle/backup\n
+  403  ll
+  404  sudo chown -R fqdev:fqdev oradata
+  405  ls -ld /mnt/docker_storage/vols/oracle/oradata\nls -ld /mnt/docker_storage/vols/oracle/backup\n
+  406  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  407  docker images
+  408  docker container ls
+  409  docker volume ls
+  410  docker network ls
+  411  docker-compose -f docker-compose.yml up -d
+  412  docker ps
+  413  ls -ld /mnt/docker_storage/vols/oracle/oradata\nls -ld /mnt/docker_storage/vols/oracle/backup\n
+  414  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  415  docker ps
+  416  docker volume ls
+  417  cd dev/github/prj-housenet/dbs/oracle-xe
+  418  ll
+  419  docker-compose -f docker-compose.yml up -d
+  420  docker ps
+  421  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  422  docker-compose -f docker-compose.yml up -d
+  423  docker ps
+  424  docker images
+  425  docker image rm gvenzl/oracle-xe:latest
+  426  docker images ls
+  427  docker images
+  428  docker image rm container-registry.oracle.com/database/express:latest
+  429  docker images
+  430  docker ps
+  431  docker-compose -f docker-compose.yml down --volumes  --rmi
+  432  docker-compose -f docker-compose.yml down --volumes  --remove-orphans --rmi all
+  433  docker ps
+  434  docker container rm oracle-test
+  435  docker images ls
+  436  docker image ls
+  437  docker ps
+  438  docker volume ls
+  439  docker network ls
+  440  docker-compose -f docker-compose.yml down --volumes  --remove-orphans --rmi all
+  441  docker-compose -f docker-compose.yml up -d
+  442  cd
+  443  sudo nvim .zshrc
+  444  cd /mnt/docker_storage
+  445  ll
+  446  cd vols
+  447  ll
+  448  cd oracle
+  449  ll
+  450  git pull
+  451  docker ps
+  452  docker-compose -f docker-compose.yml down --volumes  --remove-orphans --rmi all
+  453  docker ps
+  454  docker-compose -f docker-compose.yml up -d
+  455  docker ps
+  456  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  457  docker-compose -f docker-compose.yml up -d
+  458  docker logs
+  459  docker logs oracle-xe_oradb_1
+  460  docker ps
+  461  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  462  docker-compose -f docker-compose.yml up -d
+  463  docker ps
+  464  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  465  git pull
+  466  docker-compose -f docker-compose.yml up -d
+  467  docker ps
+  468  git pull
+  469  cat docker-compose.yml
+  470  docker-compose -f docker-compose.yml up -d
+  471  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  472  docker-compose -f docker-compose.yml up -d
+  473  docker ps
+  474  docker logs oracle-db
+  475  docker-compose logs
+  476  docker ps
+  477  docker exec -it 75ab94198901 /bin/bash\n
+  478  git pull
+  479  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  480  docker-compose -f docker-compose.yml up -d
+  481  docker ps
+  482  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  483  git pull
+  484  docker-compose -f docker-compose.yml up -d
+  485  docker ps
+  486  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  487  git pull
+  488  docker-compose -f docker-compose.yml up -d
+  489  docker ps
+  490  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  491  git pull
+  492  docker-compose -f docker-compose.yml up -d
+  493  docker ps
+  494  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  495  git pull
+  496  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  497  docker-compose -f docker-compose.yml up -d
+  498  docker ps
+  499  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  500  git pull
+  501  docker-compose -f docker-compose.yml up -d
+  502  docker ps
+  503  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  504  git pull
+  505  docker-compose -f docker-compose.yml up -d
+  506  docker ps
+  507  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  508  git pull
+  509  docker-compose -f docker-compose.yml up -d
+  510  docker ps
+  511  ll
+  512  docker ps
+  513  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  514  docker ps
+  515  git pull
+  516  cat docker-compose.yml
+  517  docker-compose -f docker-compose.yml up -d
+  518  docker ps
+  519  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  520  git pull
+  521  docker-compose -f docker-compose.yml up -d
+  522  docker ps
+  523  cat docker-compose.yml
+  524  docker ps
+  525  docker exec -it cb567fe8892a sqlplus / as sysdba\n
+  526  ll
+  527  cd oradata
+  528  ll
+  529  ..
+  530  lll
+  531  ll
+  532  mkdir scripts
+  533  ll
+  534  cd scripts
+  535  ll
+  536  nautilus .
+  537  _nautilus .
+  538  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  539  docker ps
+  540  git pull
+  541  docker-compose -f docker-compose.yml up -d
+  542  docker ps
+  543  docker exec -it 2524fbc142ce sqlplus / as sysdba\n
+  544  docker-compose -f docker-compose.yml down --volumes  --remove-orphans
+  545  git pull
+  546  docker-compose -f docker-compose.yml up -d
+  547  docker ps
+  548  docker exec -it fcf08dcda001 sqlplus / as sysdba\n
+  549  docker exec -it fcf08dcda001 /bin/bash\n
+  550  docker exec -it fcf08dcda001 sqlplus / as sysdba\n
+  551  docker ps
+  552  sqlplus -s sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba
+  553  docker exec -it fcf08dcda001 sqlplus -s sys/fqocac21c@//localhost:1521/ORCLCDB as sysdba\n
+  554  docker exec -it fcf08dcda001 sqlplus / as sysdba\n
+  555  docker exec -it fcf08dcda001 /bin/bash\n
+  556  docker exec -it fcf08dcda001 sqlplus / as sysdba\n
+  557  docker exec -it fcf08dcda001 /bin/bash\n
+  558  cd /mnt/docker_storage/vols
+  559  ll
+  560  cd oracle
+  561  ll
+  562  cd oradata
+  563  ll
+  564  cd XE
+  565  ll
+  566  sudo rm control01.ctl control02.ctl
+  567  docker exec -it fcf08dcda001 sqlplus / as sysdba\n
+  568  cd dev/github/prj-housenet/dbs/oracle-xe
+  569  ll
+  570  docker-compose -f docker-compose.yml down --volumes  --remove-orphans --rmi all
+  571  ..
+  572  ll
+  573  ..
+  574  ll
+  575  cd oradata
+  576  ll
+  577  docker ps
+  578  git pull
+  579  docker-compose -f compose.yml up -d
+  580  git pull
+  581  docker-compose -f compose.yml up -d
+  582  docker ps
+  583  docker logs 96c4cede38d4
+  584  docker-compose -f compose.yml down --volumes  --remove-orphans --rmi all
+  585  ll
+  586  sudo rm -R dbconfig
+  587  sudo rm -R XE
+  588  ll
+  589  docker-compose -f compose.yml up -d
+  590  docker ps
+  591  docker logs c87d5e1f3aef
+  592  docker-compose -f compose.yml down --volumes  --remove-orphans
+  593  docker ps
+  594  docker run -d -p 1521:1521 --name oracle-xe-test gvenzl/oracle-xe:latest
+  595  docker ps
+  596  docker start oracle-xe-test
+  597  docker ps
+  598  cd dev/github/prj-housenet/dbs/oracle-xe
+  599  ll
+  600  git pull
+  601  cat compose.yml
+  602  docker ps
+  603  docker-compose -f compose.yml up -d
+  604  docker ps
+  605  docker logs 0e92f48412e9
+  606  docker-compose -f compose.yml down --volumes  --remove-orphans
+  607  git pull
+  608  docker-compose -f compose.yml up -d
+  609  docker ps
+  610  docker logs b60b10a88f59
+  611  cd /mnt/docker_storage
+  612  ll
+  613  cd containers
+  614  ll
+  615  docker ps
+  616  sudo reboot
+  617  docker  ps
+  618  history
