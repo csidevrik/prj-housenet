@@ -12,3 +12,6 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+/cumplimiento30puntos/frontend/node_modules/*
+# Ignore the `dist` directory, which is where the final build artifacts are placed
